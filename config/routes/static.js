@@ -1,6 +1,7 @@
-const Dir = require('../dir');
 const { Service } = require('../container');
+const Dir = require('../dir');
 const Path = require('path');
+
 
 let staticRoutes = [
 
@@ -37,6 +38,7 @@ let staticRoutes = [
   },
 
 ];
+
 
 const staticConfig = {
   auth: false,

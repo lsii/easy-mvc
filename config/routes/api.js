@@ -1,5 +1,6 @@
+const { Controller, Service } = require('../container');
 const Joi = require('joi');
-const { Controller } = require('../container');
+
 
 let apiRoutes = [
 
@@ -12,7 +13,7 @@ let apiRoutes = [
 ];
 
 
-let apiConfig = {
+const apiConfig = {
   state: {
     parse: true,
     failAction: 'ignore',
@@ -20,15 +21,6 @@ let apiConfig = {
   tags: ['api']
 };
 
-const setConfigToAllRoutes = (routes, commonConfig) => {
-  return routes.map( r => {
-    let config = r.config || {};
-    r.config = Object.assign(config, commonConfig);
-    return r;
-  });
-};
 
-apiRoutes = setConfigToAllRoutes(apiRoutes, apiConfig);
-
+apiRoutes = Service.RouteUtil.setConfigToAllRoutes(apiRoutes, apiConfig);
 module.exports = apiRoutes;
-
