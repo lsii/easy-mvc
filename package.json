@@ -1,0 +1,99 @@
+{
+  "name": "easy-mvc",
+  "version": "1.0.0",
+  "description": "Easy MVC Framework.",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "db": "sequelize",
+    "dev": "gulp",
+    "build": "webpack --progress --hide-modules --config config/webpack.config.js --display-error-details",
+    "serve": "node config/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lsii/easy-mvc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lsii/easy-mvc/issues"
+  },
+  "homepage": "https://github.com/lsii/easy-mvc#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-runtime": "^6.26.0",
+    "element-ui": "^2.3.6",
+    "hapi": "^17.3.1",
+    "inert": "^5.1.0",
+    "joi": "^13.2.0",
+    "require-directory": "^2.1.1",
+    "vision": "^5.3.2",
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1"
+  },
+  "devDependencies": {
+    "hapi-swagger": "^9.1.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-component": "^1.1.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "browser-sync": "^2.23.7",
+    "cross-env": "^5.1.4",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
+    "function-bind": "^1.1.1",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "url-loader": "^1.0.1",
+    "style-loader": "^0.21.0",
+    "vue-hot-reload-api": "^2.3.0",
+    "vue-loader": "^15.0.4",
+    "vue-style-loader": "^4.1.0",
+    "vue-template-compiler": "^2.5.16",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15",
+    "webpack-dev-middleware": "^3.1.3",
+    "webpack-hot-middleware": "^2.22.1",
+    "webpack-merge": "^4.1.2"
+  },
+  "babel": {
+    "presets": [
+      [
+        "es2015",
+        {
+          "modules": false
+        }
+      ],
+      "stage-2"
+    ],
+    "plugins": [
+      "transform-runtime",
+      [
+        "component",
+        {
+          "libraryName": "element-ui",
+          "styleLibraryName": "theme-chalk"
+        }
+      ]
+    ],
+    "comments": false,
+    "env": {
+      "test": {
+        "plugins": [
+          "istanbul"
+        ]
+      }
+    }
+  }
+}
