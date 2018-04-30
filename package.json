@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "db": "sequelize",
+    "db": "knex",
     "dev": "gulp",
     "build": "webpack --progress --hide-modules --config config/webpack.config.js --display-error-details",
     "serve": "node config/app.js"
@@ -29,6 +29,9 @@
     "hapi": "^17.3.1",
     "inert": "^5.1.0",
     "joi": "^13.2.0",
+    "knex": "^0.14.6",
+    "mysql2": "^1.5.3",
+    "objection": "^1.1.7",
     "require-directory": "^2.1.1",
     "vision": "^5.3.2",
     "vue": "^2.5.16",
