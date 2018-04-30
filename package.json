@@ -7,7 +7,6 @@
     "test": "test"
   },
   "scripts": {
-    "c": "node ez",
     "db": "knex",
     "dev": "gulp",
     "build": "webpack --progress --hide-modules --config config/webpack.config.js --display-error-details",
