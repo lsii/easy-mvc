@@ -4,6 +4,7 @@ const REGISTERED_DIRECTORIES = {
   root: '',
   node_modules: "node_modules",
   app: "app",
+  command: "app/Command",
   controller: "app/Controller",
   model: "app/Model",
   service: "app/Service",

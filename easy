@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+var program = require('commander');
+var { Command } = require('./config/container');
+
+
+for (let cmd of Object.values(Command)) {
+
+  var p = program.command(cmd.command);
+
+  for (let option of cmd.options) {
+    program.option.call(p, ...option);
+  }
+
+  program.action.call(p, cmd.action);
+
+}
+
+
+program.parse(process.argv);

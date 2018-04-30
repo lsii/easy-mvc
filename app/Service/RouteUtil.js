@@ -3,10 +3,10 @@
 module.exports = {
 
   setConfigToAllRoutes: (routes, commonConfig) => {
-    return routes.map( r => {
-      let config = r.config || {};
-      r.config = Object.assign(config, commonConfig);
-      return r;
+    return routes.map( route => {
+      let config = route.config || {};
+      route.config = Object.assign(config, commonConfig);
+      return route;
     });
   }
 

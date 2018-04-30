@@ -7,6 +7,7 @@
     "test": "test"
   },
   "scripts": {
+    "c": "node ez",
     "db": "knex",
     "dev": "gulp",
     "build": "webpack --progress --hide-modules --config config/webpack.config.js --display-error-details",
@@ -25,6 +26,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-runtime": "^6.26.0",
+    "commander": "^2.15.1",
     "element-ui": "^2.3.6",
     "hapi": "^17.3.1",
     "inert": "^5.1.0",
