@@ -7,21 +7,15 @@
     "test": "test"
   },
   "scripts": {
+    "lint": "standard --fix app/**/**.js config/**/**.js db/**/**.js lib/**/**.js cmd",
     "db": "knex",
     "dev": "gulp",
     "build": "webpack --progress --hide-modules --config config/webpack.config.js --display-error-details",
-    "serve": "node config/app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lsii/easy-mvc.git"
+    "serve": "node config/app.js",
+    "test": "ava"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/lsii/easy-mvc/issues"
-  },
-  "homepage": "https://github.com/lsii/easy-mvc#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "babel-runtime": "^6.26.0",
@@ -39,7 +33,7 @@
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
-    "hapi-swagger": "^9.1.1",
+    "ava": "1.0.0-beta.4",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-component": "^1.1.0",
@@ -54,13 +48,15 @@
     "function-bind": "^1.1.1",
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.2.1",
+    "hapi-swagger": "^9.1.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
+    "standard": "^11.0.1",
+    "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^1.0.1",
-    "style-loader": "^0.21.0",
     "vue-hot-reload-api": "^2.3.0",
     "vue-loader": "^15.0.4",
     "vue-style-loader": "^4.1.0",
@@ -70,6 +66,11 @@
     "webpack-dev-middleware": "^3.1.3",
     "webpack-hot-middleware": "^2.22.1",
     "webpack-merge": "^4.1.2"
+  },
+  "standard": {
+    "global": [
+      "$container"
+    ]
   },
   "babel": {
     "presets": [
@@ -97,6 +98,26 @@
         "plugins": [
           "istanbul"
         ]
+      }
+    }
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ],
+    "sources": [
+      "**/*.{js}",
+      "!public/**/*"
+    ],
+    "concurrency": 5,
+    "failFast": true,
+    "failWithoutAssertions": false,
+    "tap": true,
+    "compileEnhancements": false,
+    "require": [],
+    "babel": {
+      "testOptions": {
+        "babelrc": false
       }
     }
   }
