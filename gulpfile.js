@@ -1,43 +1,39 @@
-var gulp = require('gulp');
-var browserSync = require('browser-sync');
-const Path = require('path');
-var nodemon = require('gulp-nodemon');
-const Dir = require('./config/dir');
-
+require('./config/boot')
+var gulp = require('gulp')
+var browserSync = require('browser-sync')
+var nodemon = require('gulp-nodemon')
 
 // Run Nodemon and connect to BrowserSync
-gulp.task('nodemon', function (cb) {
-  var called = false;
-  var appScriptPath = Path.resolve(Dir.dev, 'app.js');
+gulp.task('nodemon', (cb) => {
+  var called = false
+  var appScriptPath = $container.getPath('config/dev/app.js')
   return nodemon({
 
-      // Nodemon the dev server
-      script: appScriptPath,
+    // Nodemon the dev server
+    script: appScriptPath,
 
-      // Watch core server file(s) that require restart on change
-      watch: ['config/**/*.*', 'app/**/*.*']
-    })
-    .on('start', function onStart() {
-
+    // Watch core server file(s) that require restart on change
+    watch: ['config/**/*.*', 'app/**/*.*']
+  })
+    .on('start', function onStart () {
       // Ensure only one call
       if (!called) {
-        called = true;
-        return cb();
+        called = true
+        return cb()
       }
     })
-    .on('restart', function onRestart() {
+    .on('restart', function onRestart () {
       // Reload connected browsers after a slight delay
-      console.log('Reload');
+      console.log('Reload')
       setTimeout(function () {
         browserSync.reload({
           stream: false
-        });
-      }, 1000);
-    });
-});
+        })
+      }, 1000)
+    })
+})
 
-gulp.task('browser-sync', ['nodemon'], function () {
-
+gulp.task('browser-sync', gulp.series('nodemon', (cb) => {
   // Config options: http://www.browsersync.io/docs/options/
   browserSync.init({
 
@@ -51,9 +47,12 @@ gulp.task('browser-sync', ['nodemon'], function () {
     reloadDelay: 500,
     injectChanges: true,
     open: false
-  });
-  console.log('Initiate BrowserSync');
-});
+  })
+  console.log('Initiate BrowserSync')
+  cb()
+}))
 
 // Build
-gulp.task('default', ['browser-sync']);
+gulp.task('default', gulp.series('browser-sync', (done) => {
+  done()
+}))
