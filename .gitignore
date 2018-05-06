@@ -4,3 +4,4 @@ npm-debug.log
 public/build/*
 public/assets/*
 public/index.html
+!.gitkeep
