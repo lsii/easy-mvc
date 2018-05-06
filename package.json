@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "lint": "standard --fix app/**/**.js config/**/**.js db/**/**.js lib/**/**.js cmd",
+    "lint": "standard --fix app/**/*.js ./*.js config/**/*.js config/*.js db/**/*.js lib/**/*.js test/**/*.js test/*.js",
     "db": "knex",
     "dev": "gulp",
     "build": "webpack --progress --hide-modules --config config/webpack.config.js --display-error-details",
