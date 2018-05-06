@@ -1,31 +1,29 @@
 
-const Path = require('path');
-const Webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const Dir = require('./dir');
+require('./boot')
+const Webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
-
 
 module.exports = {
 
   mode: 'production',
 
-  entry: [Path.join(Dir.view, 'main.js')],
+  entry: [$container.getPath('app/views/main.js')],
 
   output: {
-    path: Dir.public,
+    path: $container.getPath('public'),
     publicPath: '/',
     filename: 'build/build.js'
   },
 
   resolve: {
-    modules: [Dir.node_modules],
+    modules: [$container.getPath('node_modules')],
     extensions: ['.js', '.vue'],
     alias: {
-      'client': Path.join(Dir.view),
-      'components': Path.join(Dir.view, 'components'),
-      'vue$': 'vue/dist/vue.common.js',
+      'client': $container.getPath('app/views'),
+      'components': $container.getPath('app/views/components'),
+      'vue$': 'vue/dist/vue.common.js'
     }
   },
 
@@ -72,17 +70,14 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]?[hash]',
-              outputPath: 'assets/',
+              outputPath: 'assets/'
             }
-          },
+          }
         ]
-      },
+      }
 
     ]
   },
-
-
-
 
   plugins: [
 
@@ -98,9 +93,9 @@ module.exports = {
 
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: Path.resolve(Dir.public, 'index.html'),
-      template: Path.resolve(Dir.view, 'index.html'),
-      inject: true,
+      filename: $container.getPath('public/index.html'),
+      template: $container.getPath('app/views/index.html'),
+      inject: true
     }),
 
     new ExtractTextPlugin('build/style.css')
@@ -111,6 +106,6 @@ module.exports = {
 
   performance: {
     hints: false
-  },
+  }
 
 }

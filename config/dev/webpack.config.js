@@ -1,28 +1,26 @@
-const Path = require('path');
-const Webpack = require('webpack');
-const Dir = require('../dir');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { VueLoaderPlugin } = require('vue-loader');
-
+require('../boot')
+const Webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
 
   mode: 'development',
 
-  entry: ['webpack-hot-middleware/client', Path.resolve(Dir.view, 'main.js')],
+  entry: ['webpack-hot-middleware/client', $container.getPath('app/views/main.js')],
 
   output: {
-    path: Dir.public,
+    path: $container.getPath('public'),
     publicPath: '/',
     filename: 'build/build.js'
   },
 
   resolve: {
-    modules: [Dir.node_modules],
+    modules: [$container.getPath('node_modules')],
     extensions: ['.js', '.vue'],
     alias: {
-      'client': Dir.view,
-      'components': Path.resolve(Dir.view, 'components'),
+      'client': $container.getPath('app/views'),
+      'components': $container.getPath('app/views/components'),
       'vue$': 'vue/dist/vue.common.js'
     }
   },
@@ -33,7 +31,7 @@ module.exports = {
 
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: 'vue-loader'
       },
 
       {
@@ -60,7 +58,7 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
         loader: 'url-loader'
-      },
+      }
 
     ]
   },
@@ -76,9 +74,9 @@ module.exports = {
 
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: Path.resolve(Dir.public, 'index.html'),
-      template: Path.resolve(Dir.view, 'index.html'),
-      inject: true,
+      filename: $container.getPath('public/index.html'),
+      template: $container.getPath('app/views/index.html'),
+      inject: true
     })
 
   ],
@@ -87,6 +85,6 @@ module.exports = {
 
   performance: {
     hints: false
-  },
+  }
 
 }

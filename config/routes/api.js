@@ -1,26 +1,30 @@
-const { Controller, Service } = require('../container');
-const Joi = require('joi');
 
+const controllers = $container.use('app/controllers')
 
 let apiRoutes = [
 
   {
     method: 'GET',
     path: '/api/hello',
-    handler: Controller.Hello.greet,
-  },
+    handler: controllers.HelloController.greet,
+    config: {
+      state: {parse: false}
+    }
+  }
 
-];
-
+]
 
 const apiConfig = {
   state: {
     parse: true,
-    failAction: 'ignore',
+    failAction: 'ignore'
   },
   tags: ['api']
-};
+}
 
+apiRoutes = apiRoutes.map(route => {
+  route.config = Object.assign(route.config || {}, apiConfig)
+  return route
+})
 
-apiRoutes = Service.RouteUtil.setConfigToAllRoutes(apiRoutes, apiConfig);
-module.exports = apiRoutes;
+module.exports = apiRoutes

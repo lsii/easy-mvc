@@ -1,7 +1,3 @@
-const { Service } = require('../container');
-const Dir = require('../dir');
-const Path = require('path');
-
 
 let staticRoutes = [
 
@@ -10,7 +6,7 @@ let staticRoutes = [
     path: '/assets/{filepath*}',
     handler: {
       directory: {
-        path: Path.join(Dir.public, 'assets/'),
+        path: $container.getPath('public/assets'),
         listing: false,
         index: false
       }
@@ -22,7 +18,7 @@ let staticRoutes = [
     path: '/build/{filepath*}',
     handler: {
       directory: {
-        path: Path.join(Dir.public, 'build/'),
+        path: $container.getPath('public/build'),
         listing: false,
         index: false
       }
@@ -33,12 +29,11 @@ let staticRoutes = [
     method: 'GET',
     path: '/',
     handler: (request, h) => {
-      return h.file(Path.join(Dir.public, 'index.html'));
-    },
-  },
+      return h.file($container.getPath('public/index.html'))
+    }
+  }
 
-];
-
+]
 
 const staticConfig = {
   auth: false,
@@ -48,10 +43,13 @@ const staticConfig = {
   },
   state: {
     parse: true,
-    failAction: 'ignore',
+    failAction: 'ignore'
   }
-};
+}
 
+staticRoutes = staticRoutes.map(route => {
+  route.config = Object.assign(route.config || {}, staticConfig)
+  return route
+})
 
-staticRoutes = Service.RouteUtil.setConfigToAllRoutes(staticRoutes, staticConfig);
-module.exports = staticRoutes;
+module.exports = staticRoutes
