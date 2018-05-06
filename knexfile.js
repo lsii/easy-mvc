@@ -4,7 +4,7 @@ module.exports = {
     client: 'mysql2',
     connection: {
       database: 'easy_mvc',
-      user:     'root',
+      user: 'root',
       password: ''
     },
     pool: {
@@ -24,7 +24,7 @@ module.exports = {
     client: 'mysql2',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
     },
     pool: {
@@ -40,4 +40,4 @@ module.exports = {
     }
   }
 
-};
+}
